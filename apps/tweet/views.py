@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 
 from . import models
 
@@ -12,4 +12,5 @@ def tweet_detail(request, id):
 
 
 def tweet_list(request):
-    return render(request, 'tweet/list.html', {})
+    tweets = get_list_or_404(models.Tweet)
+    return render(request, 'tweet/list.html', {'tweets': tweets})
