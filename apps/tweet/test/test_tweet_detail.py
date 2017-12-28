@@ -39,3 +39,13 @@ class TweetDetailViewTest(TestCase):
     
     def test_equal(self):
         self.assertEqual(self.response.context['tweet'], self.tweet)
+
+
+class TweetDetailFailViewTest(TestCase):
+    url = reverse('tweet:detail', kwargs={'id': 1})
+
+    def setUp(self):
+        self.response = self.client.get(self.url)
+
+    def test_get(self):
+        self.assertEqual(status.HTTP_404_NOT_FOUND, self.response.status_code)
