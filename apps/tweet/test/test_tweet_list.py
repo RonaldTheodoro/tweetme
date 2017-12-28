@@ -45,3 +45,13 @@ class TweetListViewTest(TestCase):
 
     def test_count(self):
         self.assertEqual(len(self.response.context['tweets']), 3)
+
+
+class TweetListFailViewTest(TestCase):
+    url = reverse('tweet:list')
+
+    def setUp(self):
+        self.response = self.client.get(self.url)
+
+    def test_get(self):
+        self.assertEqual(status.HTTP_404_NOT_FOUND, self.response.status_code)
