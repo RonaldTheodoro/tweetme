@@ -14,15 +14,5 @@ class TweetDetail(generic.DetailView):
         return get_object_or_404(models.Tweet, id=1)
 
 
-def tweet_detail(request, id):
-    tweet = get_object_or_404(models.Tweet, id=id)
-    return render(request, 'tweet/detail.html', {'tweet': tweet})
-
-
 class TweetList(generic.ListView):
     queryset = get_list_or_404(models.Tweet)
-
-
-def tweet_list(request):
-    tweets = get_list_or_404(models.Tweet)
-    return render(request, 'tweet/list.html', {'tweets': tweets})
