@@ -27,10 +27,6 @@ class TweetDetailViewTest(TestCase):
     def test_template(self):
         self.assertTemplateUsed(self.response, 'tweet/detail.html')
 
-    def test_function(self):
-        index = resolve(self.url)
-        self.assertEqual(views.tweet_detail, index.func)
-
     def test_context(self):
         self.assertIn('tweet', self.response.context)
 
