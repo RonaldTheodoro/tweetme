@@ -40,6 +40,9 @@ class TweetDetailViewTest(TestCase):
     def test_equal(self):
         self.assertEqual(self.response.context['tweet'], self.tweet)
 
+    def test_absolute_url(self):
+        self.assertEqual(self.url, self.tweet.get_absolute_url())
+
 
 class TweetDetailFailViewTest(TestCase):
     url = reverse('tweet:detail', kwargs={'id': 1})
