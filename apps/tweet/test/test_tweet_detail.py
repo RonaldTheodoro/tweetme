@@ -43,6 +43,9 @@ class TweetDetailViewTest(TestCase):
     def test_absolute_url(self):
         self.assertEqual(self.url, self.tweet.get_absolute_url())
 
+    def test_template_has_detail_link(self):
+        self.assertContains(self.response, self.tweet.get_absolute_url())
+
 
 class TweetDetailFailViewTest(TestCase):
     url = reverse('tweet:detail', kwargs={'id': 1})
