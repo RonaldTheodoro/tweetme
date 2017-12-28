@@ -6,8 +6,8 @@
     <h1>Tweet</h1>
     {% for tweet in tweets %}
         <p>{{ tweet.content }}</p>
-        <p>{{ tweet.created }}</p>
-        <p>{{ tweet.modified }}</p>
+        <p>{{ tweet.created|timesince }}</p>
+        <p>{{ tweet.modified|timesince }}</p>
         <p>{{ tweet.user }}</p>
     {% endfor %}
 {% endblock content %}
