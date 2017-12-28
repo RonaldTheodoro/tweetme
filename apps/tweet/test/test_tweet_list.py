@@ -28,23 +28,19 @@ class TweetListViewTest(TestCase):
     def test_template(self):
         self.assertTemplateUsed(self.response, 'tweet/list.html')
 
-    def test_function(self):
-        index = resolve(self.url)
-        self.assertEqual(views.tweet_list, index.func)
-
     def test_context(self):
-        self.assertIn('tweets', self.response.context)
+        self.assertIn('object_list', self.response.context)
 
     def test_is_instance_of(self):
         with self.subTest():
-            for tweet in self.response.context['tweets']:
+            for tweet in self.response.context['object_list']:
                 self.assertIsInstance(tweet, models.Tweet)
     
     def test_equal(self):
-        self.assertEqual(self.response.context['tweets'], self.tweets)
+        self.assertEqual(self.response.context['object_list'], self.tweets)
 
     def test_count(self):
-        self.assertEqual(len(self.response.context['tweets']), 3)
+        self.assertEqual(len(self.response.context['object_list']), 3)
 
     def test_absolute_url(self):
         with self.subTest():
@@ -58,13 +54,3 @@ class TweetListViewTest(TestCase):
         with self.subTest():
             for tweet in self.tweets:
                 self.assertContains(self.response, tweet.get_absolute_url())
-
-
-class TweetListFailViewTest(TestCase):
-    url = reverse('tweet:list')
-
-    def setUp(self):
-        self.response = self.client.get(self.url)
-
-    def test_get(self):
-        self.assertEqual(status.HTTP_404_NOT_FOUND, self.response.status_code)
