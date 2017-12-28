@@ -7,3 +7,7 @@ def index(request):
 
 def tweet_detail(request, id):
     return render(request, 'tweet/detail.html', {})
+
+
+def tweet_list(request):
+    return render(request, 'tweet/list.html', {})
