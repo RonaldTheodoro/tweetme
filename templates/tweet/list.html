@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <h1>Tweet</h1>
+    {% for tweet in tweets %}
+        <p>{{ tweet.content }}</p>
+        <p>{{ tweet.created }}</p>
+        <p>{{ tweet.modified }}</p>
+        <p>{{ tweet.user }}</p>
+    {% endfor %}
+{% endblock content %}
