@@ -16,3 +16,5 @@ class TweetDetail(generic.DetailView):
 
 class TweetList(generic.ListView):
     queryset = get_list_or_404(models.Tweet)
+    template_name = 'tweet/tweet_list.html'
+    

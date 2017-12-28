@@ -25,7 +25,7 @@ class TweetDetailViewTest(TestCase):
         self.assertEqual(status.HTTP_200_OK, self.response.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'tweet/detail.html')
+        self.assertTemplateUsed(self.response, 'tweet/tweet_detail.html')
 
     def test_context(self):
         self.assertIn('tweet', self.response.context)

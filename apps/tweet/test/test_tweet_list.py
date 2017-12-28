@@ -26,7 +26,7 @@ class TweetListViewTest(TestCase):
         self.assertEqual(status.HTTP_200_OK, self.response.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'tweet/list.html')
+        self.assertTemplateUsed(self.response, 'tweet/tweet_list.html')
 
     def test_context(self):
         self.assertIn('object_list', self.response.context)
