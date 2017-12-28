@@ -1,10 +1,10 @@
 from django.contrib.auth import get_user_model
-from django.urls import resolve, reverse
 from django.test import TestCase
+from django.urls import resolve, reverse
 
 from rest_framework import status
 
-from .. import views, models
+from .. import models, views
 
 
 User = get_user_model()
@@ -33,5 +33,9 @@ class TweetDetailViewTest(TestCase):
 
     def test_context(self):
         self.assertIn('tweet', self.response.context)
+
+    def test_is_instance_of(self):
         self.assertIsInstance(self.response.context['tweet'], models.Tweet)
+    
+    def test_equal(self):
         self.assertEqual(self.response.context['tweet'], self.tweet)
