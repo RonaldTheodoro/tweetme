@@ -46,6 +46,19 @@ class TweetListViewTest(TestCase):
     def test_count(self):
         self.assertEqual(len(self.response.context['tweets']), 3)
 
+    def test_absolute_url(self):
+        with self.subTest():
+            for tweet in self.tweets:
+                self.assertEqual(
+                    reverse('tweet:detail', kwargs={'id': tweet.id}),
+                    tweet.get_absolute_url()
+                )
+
+    def test_template_has_detail_link(self):
+        with self.subTest():
+            for tweet in self.tweets:
+                self.assertContains(self.response, tweet.get_absolute_url())
+
 
 class TweetListFailViewTest(TestCase):
     url = reverse('tweet:list')
