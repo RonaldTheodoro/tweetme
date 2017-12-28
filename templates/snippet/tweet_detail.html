@@ -1,4 +1,4 @@
-<p>{{ tweet.content }}</p>
+<p><a href="{{ tweet.get_absolute_url }}">{{ tweet.content }}</a></p>
 <p>{{ tweet.created|timesince }}</p>
 <p>{{ tweet.modified|timesince }}</p>
 <p>{{ tweet.user }}</p>
