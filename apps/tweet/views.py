@@ -9,10 +9,10 @@ def index(request):
 
 
 class TweetDetail(generic.DetailView):
-    template_name = 'tweet/detail.html'
-
+    
     def get_object(self, queryset=None):
         return get_object_or_404(models.Tweet, id=1)
+
 
 def tweet_detail(request, id):
     tweet = get_object_or_404(models.Tweet, id=id)
@@ -21,7 +21,7 @@ def tweet_detail(request, id):
 
 class TweetList(generic.ListView):
     queryset = get_list_or_404(models.Tweet)
-    template_name = 'tweet/list.html'
+
 
 def tweet_list(request):
     tweets = get_list_or_404(models.Tweet)
