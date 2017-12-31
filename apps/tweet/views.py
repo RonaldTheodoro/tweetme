@@ -9,9 +9,9 @@ def index(request):
 
 
 class TweetDetail(generic.DetailView):
-    
-    def get_object(self, queryset=None):
-        return get_object_or_404(models.Tweet, id=1)
+
+    def get_object(self):
+        return get_object_or_404(models.Tweet, id=self.kwargs.get('id'))
 
 
 class TweetList(generic.ListView):
