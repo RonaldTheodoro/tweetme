@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.test import TestCase, LiveServerTestCase
 from django.urls import resolve, reverse
 
 from rest_framework import status
@@ -35,12 +35,6 @@ class TweetListViewTest(TestCase):
         with self.subTest():
             for tweet in self.response.context['object_list']:
                 self.assertIsInstance(tweet, models.Tweet)
-    
-    def test_equal(self):
-        self.assertEqual(self.response.context['object_list'], self.tweets)
-
-    def test_count(self):
-        self.assertEqual(len(self.response.context['object_list']), 3)
 
     def test_absolute_url(self):
         with self.subTest():
