@@ -22,3 +22,7 @@ class TweetList(generic.ListView):
 class TweetCreate(generic.CreateView):
     form_class = forms.TweetForm
     template_name = 'tweet/tweet_form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(TweetCreate, self).form_valid(form)
