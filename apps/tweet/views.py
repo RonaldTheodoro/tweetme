@@ -1,4 +1,5 @@
 from django.shortcuts import get_list_or_404, get_object_or_404, render
+from django.urls import reverse
 from django.views import generic
 
 from . import forms, models
@@ -10,6 +11,13 @@ def index(request):
 
 class TweetDetail(generic.DetailView):
 
+    def get_object(self):
+        return get_object_or_404(models.Tweet, id=self.kwargs.get('id'))
+
+
+class TweetUpdate(generic.UpdateView):
+    form_class = forms.TweetForm
+    
     def get_object(self):
         return get_object_or_404(models.Tweet, id=self.kwargs.get('id'))
 
