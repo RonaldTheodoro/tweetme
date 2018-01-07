@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
@@ -15,7 +16,8 @@ class TweetDetail(generic.DetailView):
         return get_object_or_404(models.Tweet, id=self.kwargs.get('id'))
 
 
-class TweetUpdate(generic.UpdateView):
+class TweetUpdate(LoginRequiredMixin, generic.UpdateView):
+    login_url = '/login/'
     form_class = forms.TweetForm
     
     def get_object(self):
@@ -27,7 +29,8 @@ class TweetList(generic.ListView):
     template_name = 'tweet/tweet_list.html'
 
 
-class TweetCreate(generic.CreateView):
+class TweetCreate(LoginRequiredMixin, generic.CreateView):
+    login_url = '/login/'
     form_class = forms.TweetForm
     template_name = 'tweet/tweet_form.html'
 
