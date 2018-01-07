@@ -1,8 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core import exceptions
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-from django.http import HttpResponseForbidden
 
 from . import forms, models
 
@@ -24,12 +24,11 @@ class TweetUpdate(LoginRequiredMixin, generic.UpdateView):
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
         if obj.user != self.request.user:
-            return HttpResponseForbidden()
+            raise exceptions.PermissionDenied()
         return super(TweetUpdate, self).dispatch(request, *args, **kwargs)
 
     def get_object(self):
         return get_object_or_404(models.Tweet, id=self.kwargs.get('id'))
-
 
 
 class TweetList(generic.ListView):
