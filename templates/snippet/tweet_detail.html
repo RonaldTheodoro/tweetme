@@ -2,4 +2,6 @@
 <p>{{ tweet.created|timesince }}</p>
 <p>{{ tweet.modified|timesince }}</p>
 <p>{{ tweet.user }}</p>
-<p><a href="{% url 'tweet:update' tweet.id %}">Edit</a></p>
+{% if user.is_authenticated %}
+    <p><a href="{% url 'tweet:update' tweet.id %}">Edit</a></p>
+{% endif %}
