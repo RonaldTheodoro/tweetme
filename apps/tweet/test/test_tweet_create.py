@@ -10,7 +10,7 @@ from .. import forms, models, views
 User = get_user_model()
 
 
-class TweetCreateGETViewTest(TestCase):
+class TweetCreateViewTest(TestCase):
     url = reverse('tweet:create')
 
     def setUp(self):
