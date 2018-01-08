@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import exceptions
+from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -32,8 +33,18 @@ class TweetUpdate(LoginRequiredMixin, generic.UpdateView):
 
 
 class TweetList(generic.ListView):
-    queryset = models.Tweet.objects.all()
+    # queryset = models.Tweet.objects.all()
     template_name = 'tweet/tweet_list.html'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = models.Tweet.objects.all()
+        query = self.request.GET.get('q', None)
+        if query is not None:
+            qs = qs.filter(
+                Q(content__icontains=query) |
+                Q(user__username__icontains=query)
+            )
+        return qs
 
 
 class TweetCreate(LoginRequiredMixin, generic.CreateView):
