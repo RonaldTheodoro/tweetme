@@ -7,7 +7,7 @@
 
     <h1>Tweet</h1>
     {% for tweet in object_list %}
-        {% include 'snippet/tweet_detail.html' %}
+        {% include 'snippet/detail.html' %}
     {% empty %}
         {% if request.GET.q %}
             <p>No tweets found.</p>
