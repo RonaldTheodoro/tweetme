@@ -27,3 +27,15 @@ class TweetCreateViewTest(TestCase):
 
     def test_context(self):
         self.assertIn('form', self.response.context)
+
+
+class TweetCreateFailViewTest(TestCase):
+    url = reverse('tweet:create')
+
+    def setUp(self):
+        self.response = self.client.get(self.url, follow=True)
+
+    def test_redirect_to_login_page(self):
+        """Unauthenticate user must be redirect to login view"""
+        login_url = reverse('login')
+        self.assertRedirects(self.response, f'{login_url}?next={self.url}')
