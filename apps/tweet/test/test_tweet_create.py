@@ -29,6 +29,25 @@ class TweetCreateViewTest(TestCase):
         self.assertIn('form', self.response.context)
 
 
+class TweetCreatePOSTViewTest(TestCase):
+    url = reverse('tweet:create')
+
+    def setUp(self):
+        user_data = {'username':'ronaldtheodoro', 'password': 'asdf1234'}
+        user = User.objects.create_user(**user_data)
+        self.client.login(**user_data)
+        self.response = self.client.post(
+            self.url,
+            data={'content': 'My Tweet'}
+        )
+
+    def test_redirect_to_detail_page(self):
+        self.assertRedirects(
+            self.response,
+            reverse('tweet:detail', kwargs={'id': 1})
+        )
+
+
 class TweetCreateFailViewTest(TestCase):
     url = reverse('tweet:create')
 
