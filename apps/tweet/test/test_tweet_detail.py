@@ -14,7 +14,9 @@ class TweetDetailViewTest(TestCase):
     url = reverse('tweet:detail', kwargs={'id': 1})
 
     def setUp(self):
-        user = User.objects.create_user(username='ronaldtheodoro')
+        user_data = {'username': 'ronaldtheodoro', 'password': 'asdf1234'}
+        user = User.objects.create_user(**user_data)
+        self.client.login(**user_data)
         self.tweet = models.Tweet.objects.create(
             content='My First Tweet',
             user=user
@@ -41,6 +43,14 @@ class TweetDetailViewTest(TestCase):
 
     def test_template_has_detail_link(self):
         self.assertContains(self.response, self.tweet.get_absolute_url())
+
+    def test_template_has_edit_link(self):
+        self.assertContains(
+            self.response,
+            reverse('tweet:update', kwargs={'id': self.tweet.id})
+        )
+
+    
 
 
 class TweetDetailFailViewTest(TestCase):
