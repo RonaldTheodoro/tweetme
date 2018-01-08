@@ -49,8 +49,12 @@ class TweetDetailViewTest(TestCase):
             self.response,
             reverse('tweet:update', kwargs={'id': self.tweet.id})
         )
-
     
+    def test_template_has_delete_link(self):
+        self.assertContains(
+            self.response,
+            reverse('tweet:delete', kwargs={'pk': self.tweet.id})
+        )
 
 
 class TweetDetailFailViewTest(TestCase):
