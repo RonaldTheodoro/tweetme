@@ -1,15 +1,22 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import resolve, reverse
 
 from rest_framework import status
 
-from .. import models, views, forms
+from .. import forms, models, views
 
 
-class TweetCreateViewTest(TestCase):
+User = get_user_model()
+
+
+class TweetCreateGETViewTest(TestCase):
     url = reverse('tweet:create')
 
     def setUp(self):
+        data = {'username':'ronaldtheodoro', 'password': 'asdf1234'}
+        user = User.objects.create_user(**data)
+        self.client.login(**data)
         self.response = self.client.get(self.url)
 
     def test_get(self):
