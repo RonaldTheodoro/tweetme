@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="media">
     <div class="media-left">
         <a href="#">
@@ -10,7 +12,9 @@
         {{ tweet.content }} <br/>
         via {{ tweet.user }} | 
         {{ tweet.modified|timesince }} ago | 
-        <a href="{{ tweet.get_absolute_url }}">View</a>
+        <a href="{{ tweet.get_absolute_url }}">
+            View <img src="{% static 'icone/eye.svg' %}">
+        </a>
     </div>
 </div>
 <hr/>
