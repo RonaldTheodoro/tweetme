@@ -1,4 +1,16 @@
-<p><a href="{{ tweet.get_absolute_url }}">{{ tweet.content }}</a></p>
-<p>{{ tweet.created|timesince }}</p>
-<p>{{ tweet.modified|timesince }}</p>
-<p>{{ tweet.user }}</p>
+<div class="media">
+    <div class="media-left">
+        <a href="#">
+            {% if tweet.image %}
+                <img class="media-object" src="..." alt="...">
+            {% endif %}
+        </a>
+    </div>
+    <div class="media-body">
+        {{ tweet.content }} <br/>
+        via {{ tweet.user }} | 
+        {{ tweet.modified|timesince }} ago | 
+        <a href="{{ tweet.get_absolute_url }}">View</a>
+    </div>
+</div>
+<hr/>
