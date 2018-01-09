@@ -5,7 +5,6 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-            {% include 'snippet/search_form.html' %}
             {% for tweet in object_list %}
                 {% include 'snippet/detail.html' %}
             {% empty %}
