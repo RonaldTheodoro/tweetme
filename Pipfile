@@ -18,6 +18,7 @@ dj-static = "*"
 django-extensions = "*"
 django-test-without-migrations = "*"
 django-model-utils = "*"
+django-debug-toolbar = "*"
 
 
 [dev-packages]

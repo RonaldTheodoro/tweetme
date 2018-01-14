@@ -31,7 +31,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'test_without_migrations',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Third party middleware
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -137,3 +139,6 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'tweet:index'
 LOGOUT_REDIRECT_URL = 'tweet:index'
+
+# Django debug toolbar
+INTERNAL_IPS = '127.0.0.1'
